@@ -93,20 +93,19 @@ def select_where(conn, table, **query):
    for k, v in query.items():
        qs.append(f"{k}=?")
        values += (v,)
-       print(k)
-       print(v)
-       print(qs)
-       print (values)
    q = " AND ".join(qs)
    cur.execute(f"SELECT * FROM {table} WHERE {q}", values)
    rows = cur.fetchall()
    return rows
 
 #print("tasks")
-print(select_where(conn, "tasks", project_id=1))
+#print(select_where(conn, "tasks", project_id=1))
 
-#print("tasks in progress")
-#print(select_where(conn, "tasks", status="in progress"))
+#for k in select_where(conn, "tasks", project_id=1,id =4):
+#    print(k)
+
+print("tasks in progress")
+print(select_where(conn, "tasks", status="in progress"))
 
 
 
