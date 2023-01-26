@@ -13,7 +13,6 @@ def create_connection(db_file):
         return conn
     except Error as e:
         print(e)
-
     return conn
 
 def execute_sql(conn, sql):
@@ -46,22 +45,24 @@ def select_task_by_status(conn, status):
 conn = create_connection("database.db")
 cur = conn.cursor()
 cur.execute("SELECT * FROM tasks")
-print(cur.execute("SELECT * FROM tasks"))
+#print(cur.execute("SELECT * FROM tasks")); print(11)
 
 rows = cur.fetchall()
-print(rows)
+#for row in rows:
+#    print(row)
+#print(rows)
 
-
-print()
+#print(54)
+#print(54)
 cur.execute("SELECT * FROM tasks")
 #print(cur.fetchone())
 
-for i in range(10):
-    print(cur.fetchone())
+#for i in range(10):
+#    print(cur.fetchone())
 
-print()
-print(select_task_by_status(conn,"in progress"))
-
+#print("BEGIN only tasks in progress")
+#print(select_task_by_status(conn,"in progress"))
+#print("END only tasks in progress")
 
 def select_all(conn, table):
    """
@@ -75,8 +76,8 @@ def select_all(conn, table):
 
    return rows
 
-print("select_all")
-print(select_all(conn,"tasks"))
+#print("select_all")
+#print(select_all(conn,"tasks"))
 
 def select_where(conn, table, **query):
    """
@@ -92,16 +93,20 @@ def select_where(conn, table, **query):
    for k, v in query.items():
        qs.append(f"{k}=?")
        values += (v,)
+       print(k)
+       print(v)
+       print(qs)
+       print (values)
    q = " AND ".join(qs)
    cur.execute(f"SELECT * FROM {table} WHERE {q}", values)
    rows = cur.fetchall()
    return rows
 
-print("tasks")
-print(select_where(conn, "tasks", project_id=2))
+#print("tasks")
+print(select_where(conn, "tasks", project_id=1))
 
-print("tasks in progress")
-print(select_where(conn, "tasks", status="in progress"))
+#print("tasks in progress")
+#print(select_where(conn, "tasks", status="in progress"))
 
 
 
