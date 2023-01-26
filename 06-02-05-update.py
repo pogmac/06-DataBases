@@ -45,11 +45,11 @@ def update(conn, table, id, **kwargs):
        print(e)
 
 
-if __name__ == "__main__":
-   conn = create_connection("database.db")
-   update(conn, "tasks", 2, status="started")
-   #update(conn, "tasks", 2, stat="started")
-   conn.close()
+#if __name__ == "__main__":
+conn = create_connection("database.db")
+update(conn, "tasks", 2, status="new status")
+#update(conn, "tasks", 2, stat="started")
+conn.close()
 
 
 
@@ -69,10 +69,10 @@ def delete(conn, table, id):
     except sqlite3.OperationalError as e:
        print(e)
 
-if __name__ == "__main__":
-   conn = create_connection("database.db")
-   delete(conn, "tasks", 2)
-   conn.close()
+#if __name__ == "__main__":
+#   conn = create_connection("database.db")
+#   delete(conn, "tasks", 2)
+#   conn.close()
 
 
 ### DELETE ###
