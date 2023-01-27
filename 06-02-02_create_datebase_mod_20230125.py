@@ -46,15 +46,29 @@ def add_project(conn, project):
 
 def add_task(conn, task):
    """
-   Create a new project into the projects table
+   Create a new task into the tasks table
    :param conn:
-   :param project:
-   :return: project id
+   :param task:
+   :return: task id
    """
    sql = '''INSERT INTO tasks( project_id, name, description, status, start_date, end_date)
              VALUES(?,?,?,?,?,?)'''
    cur = conn.cursor()
    cur.execute(sql, task)
+   conn.commit()
+   return cur.lastrowid
+
+def add_student(conn, student):
+   """
+   Create a new project into the students table
+   :param conn:
+   :param student:
+   :return: id
+   """
+   sql = '''INSERT INTO students(first_name, last_name)
+             VALUES(?,?)'''
+   cur = conn.cursor()
+   cur.execute(sql, student)
    conn.commit()
    return cur.lastrowid
 
@@ -84,6 +98,16 @@ CREATE TABLE IF NOT EXISTS tasks (
     FOREIGN KEY (project_id) REFERENCES projects (id)
 );
 """
+
+#""" Create Studends Table """
+create_students_sql =     """
+-- zadanie table
+CREATE TABLE IF NOT EXISTS students (
+    id integer PRIMARY KEY,
+    first_name VARCHAR(250) NOT NULL,
+    last_name VARCHAR(250) NOT NULL
+);
+"""
 #""" Insert into Tasks Table"""
 insert_task_sql = """INSERT INTO tasks
 (id, project_id, name, description, status, start_date, end_date)
@@ -96,14 +120,16 @@ if conn is not None:
     #execute_sql(conn, create_projects_sql)
     #execute_sql(conn, create_tasks_sql)
     #execute_sql(conn, insert_project_sql)
-    task = (2,"new begining", "cancel all the rent agreements for the project's activivies", "not started",  "2024.01.12", "2024.01.23") # Adding a task
-    tk_id = (add_task(conn, task))
-    print(tk_id)
+    #execute_sql(conn, create_students_sql)
+    #task = (2,"new begining", "cancel all the rent agreements for the project's activivies", "not started",  "2024.01.12", "2024.01.23") # Adding a task
+    #tk_id = (add_task(conn, task));print(tk_id)
+    #conn.close()
     #project = ("Polski", "2020-05-15 00:00:00", "2020-05-17 00:00:00") # Adding a project
-    #pr_id = add_project(conn, project)
-    #print(pr_id)
-    conn.close()
-    
+    #pr_id = add_project(conn, project);print(f"pr_id = {pr_id}")
+    #conn.close()
+    #student = ("sarah","connor")
+    #add_student(conn, student)
+    #conn.close()
 
 
 

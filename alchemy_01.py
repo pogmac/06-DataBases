@@ -12,9 +12,11 @@ print(engine.driver)
 
 print(engine.table_names())
 
+
 print(engine.execute("SELECT * FROM tasks"))
 
 results = engine.execute("SELECT * FROM tasks")
+
 
 for r in results:
    print(r)

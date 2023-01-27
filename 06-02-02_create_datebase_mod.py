@@ -88,6 +88,10 @@ if __name__ == "__main__":
     (id, project_id, name, description, status, start_date, end_date)
     VALUES (5,2,"fire members", "fire members of the project", "not started", "2024.01.10", "2024.01.14")
     """
+    insert_student_sql = """INSERT INTO students
+    (id, name, lastname)
+    VALUES (2,"Sarah", "Connor")
+    """
     db_file = "database.db"
 
     conn = create_connection(db_file)
@@ -95,9 +99,10 @@ if __name__ == "__main__":
         #execute_sql(conn, create_projects_sql)
         #execute_sql(conn, create_tasks_sql)
         #execute_sql(conn, insert_project_sql)
-        task = (2,"closure", "cancel all the rent agreements for the project's activivies", "not started",  "2024.01.12", "2024.01.23")
-        tk_id = (add_task(conn, task))
-        print(tk_id)
+        execute_sql(conn, insert_student_sql)
+        #task = (2,"closure", "cancel all the rent agreements for the project's activivies", "not started",  "2024.01.12", "2024.01.23")
+        #tk_id = (add_task(conn, task))
+        #print(tk_id)
         #project = ("Posadasdwtórka z angielskiego", "2020-05-12 00:00:00", "2020-05-14 00:00:00")
         #pr_id = add_project(conn, project)
         #print(pr_id)
